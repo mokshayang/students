@@ -7,7 +7,19 @@
     <link rel="stylesheet" href="style.css" type="text/css">   
     <title>學生管理系統</title>
     <style>
-
+        #list-students{
+            display: grid;
+            grid-auto-rows: 40px;
+            
+        }
+        #list-students .items{
+            display: grid;
+            grid-template-columns: repeat(6,1fr);
+            align-items: center;
+        }
+        #list-students .items:nth-child(2n){
+            background-color: #eef;
+        }
     </style>
 </head>
 <body>
@@ -34,31 +46,33 @@ $sql="SELECT * FROM `students` LIMIT 20 ";
 // echo "</pre>";
 ?>
 
-<table border="1" id="list-students">
-    <tr>
-        <td>學號</td>
-        <td>姓名</td>
-        <td>生日</td>
-        <td>畢業國中代碼</td>
-        <td>年齡</td>
-        <td>操作</td>
-    </tr>
+<div id="list-students">
+    <div class="items">
+        <div>學號</div>
+        <div>姓名</div>
+        <div>生日</div>
+        <div>畢業國中代碼</div>
+        <div>年齡</div>
+        <div>操作</div>
+    </div>
 <?php
 foreach($rows as $row){
     $age=round((strtotime('now')-strtotime($row['birthday']))/(60*60*24*365),1);
 
-    echo "<tr>";
-    echo "<td>{$row['school_num']}</td>";
-    echo "<td>{$row['name']}</td>";
-    echo "<td>{$row['birthday']}</td>";
-    echo "<td>{$row['graduate_at']}</td>";
-    echo "<td>{$age}</td>";
-    echo "<td>";
+    // echo "<tr>";
+    echo "<div class='items'>";
+    echo "<div>{$row['school_num']}</div>";
+    echo "<div>{$row['name']}</div>";
+    echo "<div>{$row['birthday']}</div>";
+    echo "<div>{$row['graduate_at']}</div>";
+    echo "<div>{$age}</div>";
+    echo "<div>";
     echo "<a href='edit.php?id={$row['id']}'>編輯</a>";
     echo "<a href='del.php?id={$row['id']}'>刪除</a>";
-    echo "</tr>";
+    echo "</div>";
+    echo "</div>";
 }
 ?>
-</table>
+</div>
 </body>
 </html>

@@ -12,11 +12,13 @@
     <h1>學生管理系統</h1>
     <?php
 $dsn="mysql:host=localhost;charset=utf8;dbname=school";
-$pdo= new PDO($dsn,'moksha','ji308120');
+$pdo= new PDO($dsn,'moksha','ji308120');//連線物件 PDO();
 
-$sql="SELECT * FROM `students` LIMIT 5";
-
-$rows=$pdo->query($sql)->fetchALL();
+$sql="SELECT * FROM `students` ";
+$result=$pdo->query($sql);//連線到資料表data了
+$rows=$result->fetch(PDO::FETCH_NAMED);//對資料表fetch(拿取資料);
+$rows=$result->fetch(PDO::FETCH_NAMED);
+// $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_NAMED);
 
 echo "<pre>";
 print_r($rows);
